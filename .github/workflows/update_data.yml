@@ -4,6 +4,9 @@ name: Fetch new data and update the repository
 #   schedule:
 #   - cron: "30 1 * * *"
 
+on:
+  workflow_dispatch:
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
