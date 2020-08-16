@@ -43,4 +43,5 @@ jobs:
       run: |
         git checkout -b new-data-$(date +%Y-%m-%d)
         git add data
+        git commit -m "Adding data from $(date +%Y-%m-%d)"
         git push -u origin $(git rev-parse --abbrev-ref HEAD)
