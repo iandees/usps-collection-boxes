@@ -37,7 +37,7 @@ jobs:
         scrapy crawl usps_collection_boxes --output ../usps_collection_boxes.ndjson:ndgeojson --loglevel=ERROR
     - name: Sort the data
       run: |
-        mkdir data
+        mkdir -p data
         python sort.py usps_collection_boxes.ndjson usps_collection_boxes_sorted.ndjson --prefix-dir=data --prefix-chars=3
     - name: Make a new pull request
       run: |
