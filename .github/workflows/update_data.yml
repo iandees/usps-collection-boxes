@@ -1,0 +1,46 @@
+name: Fetch new data and update the repository
+
+# on:
+#   schedule:
+#   - cron: "30 1 * * *"
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: action/checkout@v1
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: 3.7
+    - name: Grab latest alltheplaces
+      run: |
+        git clone --depth=1 https://github.com/alltheplaces/alltheplaces.git
+    - name: Install scrapy
+      run: |
+        pip --quiet --upgrade install pip scrapy
+    - name: Run USPS spider
+      run: |
+        cd alltheplaces
+        scrapy crawl usps_collection_boxes --output ../usps_collection_boxes.ndjson:ndgeojson --loglevel=ERROR
+    - name: Sort the data
+      run: |
+        mkdir data
+        python sort.py usps_collection_boxes.ndjson usps_collection_boxes_sorted.ndjson --prefix-dir=data --prefix-chars=3
+    - name: Make a new pull request
+      run: |
+        git checkout -b new-data-$(date +%Y-%m-%d)
+        git add data
+        git push -u origin $(git rev-parse --abbrev-ref HEAD)
