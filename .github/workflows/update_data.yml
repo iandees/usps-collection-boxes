@@ -30,7 +30,7 @@ jobs:
         git clone --depth=1 https://github.com/alltheplaces/alltheplaces.git
     - name: Install scrapy
       run: |
-        pip install --quiet --upgrade pip scrapy
+        pip install --quiet --upgrade pip scrapy xlrd
     - name: Run USPS spider
       run: |
         cd alltheplaces
