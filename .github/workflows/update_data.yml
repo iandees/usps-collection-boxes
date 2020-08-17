@@ -33,6 +33,7 @@ jobs:
       run: |
         git config user.email "ian.dees+bot@gmail.com"
         git config user.name "USPS Bot"
+        echo "$(date +%Y-%m-%dT%H:%M:%SZ)" > data/last_updated.txt
         git add data
         git commit -m "Adding data from $(date +%Y-%m-%d)"
         git push origin master
