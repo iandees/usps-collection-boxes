@@ -1,19 +1,10 @@
 name: Fetch new data and update the repository
 
-# on:
-#   schedule:
-#   - cron: "30 1 * * *"
-
 on:
   workflow_dispatch:
-    inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
+    types: [update-data]
+  schedule:
+    - cron: "5 8 * * *"
 
 jobs:
   update-data:
