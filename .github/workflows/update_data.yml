@@ -41,6 +41,8 @@ jobs:
         python sort.py usps_collection_boxes.ndjson usps_collection_boxes_sorted.ndjson --prefix-dir=data --prefix-chars=3
     - name: Make a new pull request
       run: |
+        git config user.email "ian.dees+bot@gmail.com"
+        git config user.name "USPS Bot"
         git checkout -b new-data-$(date +%Y-%m-%d)
         git add data
         git commit -m "Adding data from $(date +%Y-%m-%d)"
