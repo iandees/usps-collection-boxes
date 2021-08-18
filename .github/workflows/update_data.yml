@@ -3,7 +3,7 @@ name: Fetch new data and update the repository
 on:
   workflow_dispatch:
   schedule:
-    - cron: "5 8 * * *"
+    - cron: "5 8 */3 * *"
 
 jobs:
   update-data:
