@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Setup Python
       uses: actions/setup-python@master
       with:
@@ -20,7 +20,7 @@ jobs:
         git clone --depth=1 https://github.com/alltheplaces/alltheplaces.git
     - name: Install scrapy
       run: |
-        pip install --quiet --upgrade pip scrapy xlrd geonamescache json5
+        pip install --quiet --upgrade pip scrapy xlrd geonamescache json5 chompjs
     - name: Run USPS spider
       run: |
         cd alltheplaces
