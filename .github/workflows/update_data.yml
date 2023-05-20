@@ -20,7 +20,7 @@ jobs:
         git clone --depth=1 https://github.com/alltheplaces/alltheplaces.git
     - name: Install scrapy
       run: |
-        pip install --quiet --upgrade pip scrapy xlrd geonamescache json5 chompjs xmltodict phonenumbers reverse_geocoder xmltodict requests_cache pycountry
+        pip install --quiet --upgrade pip scrapy xlrd geonamescache json5 chompjs xmltodict phonenumbers reverse_geocoder xmltodict requests_cache pycountry ijson
     - name: Run USPS spider
       run: |
         cd alltheplaces
