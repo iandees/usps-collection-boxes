@@ -24,6 +24,6 @@ if __name__ == "__main__":
             with open(os.path.join(args.prefix_dir, '%s.ndjson' % k), 'w') as f:
                 for feature in features:
                     # Remove the scraped timestamp that was added in https://github.com/alltheplaces/alltheplaces/pull/5661
-                    feature["properties"] = feature["properties"].pop("spider:collection_time", None)
+                    feature["properties"].pop("spider:collection_time", None)
 
                     f.write(json.dumps(feature, sort_keys=True) + '\n')
