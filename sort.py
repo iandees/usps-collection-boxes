@@ -25,5 +25,6 @@ if __name__ == "__main__":
                 for feature in features:
                     # Remove the scraped timestamp that was added in https://github.com/alltheplaces/alltheplaces/pull/5661
                     feature["properties"].pop("spider:collection_time", None)
+                    feature.pop("dataset_attributes", None)
 
                     f.write(json.dumps(feature, sort_keys=True) + '\n')
