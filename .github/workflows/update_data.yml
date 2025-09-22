@@ -24,6 +24,7 @@ jobs:
     - name: Run USPS spider
       run: |
         cd alltheplaces
+        find locations/spiders/ ! -name 'usps_collection_boxes.py' -type f -exec rm {} +
         scrapy crawl usps_collection_boxes --output ../usps_collection_boxes.ndjson:ndgeojson --loglevel=ERROR
     - name: Sort the data
       run: |
