@@ -12,20 +12,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Setup Python
-      uses: actions/setup-python@master
+      uses: actions/setup-python@v5
       with:
-        python-version: 3
+        python-version: '3.12'
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
     - name: Grab latest alltheplaces
       run: |
         git clone --depth=1 https://github.com/alltheplaces/alltheplaces.git
-    - name: Install scrapy
-      run: |
-        pip install --quiet --upgrade pip scrapy xlrd geonamescache json5 chompjs xmltodict phonenumbers reverse_geocoder xmltodict requests_cache pycountry ijson openpyxl pyproj pygeohash unidecode phpserialize shapely babel geopandas h2 pdfplumber scrapy_zyte_api pyarrow
     - name: Run USPS spider
       run: |
         cd alltheplaces
-        find locations/spiders/ ! -name 'usps_collection_boxes.py' -type f -exec rm {} +
-        scrapy crawl usps_collection_boxes --output ../usps_collection_boxes.ndjson:ndgeojson --loglevel=ERROR
+        uv run --with scrapy scrapy runspider locations/spiders/usps_collection_boxes.py --output ../usps_collection_boxes.ndjson:ndgeojson --loglevel=ERROR
     - name: Sort the data
       run: |
         mkdir -p data
